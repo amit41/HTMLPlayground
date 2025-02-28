@@ -1,0 +1,154 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar Container */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  padding: 12px;
+}
+
+/* Navbar Logo */
+.navbar .logo {
+  margin-right: 32px;
+}
+
+/* Navbar Links */
+ul {
+  list-style: none;
+}
+.nav-links {
+  display: flex;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  padding: 10px 15px;
+  display: block;
+}
+
+.nav-links a:hover {
+  background-color: #555;
+}
+
+/* Submenu */
+.submenu-parent::after {
+  content: "\25bc"; /* Hamburger icon */
+  color: white;
+  font-size: 14px;
+  margin-left: 6px;
+}
+.submenu {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  background-color: #444;
+  width: 150px;
+  height: 0;
+  box-sizing: border-box;
+  transition: height 0.3s ease-in-out;
+  transition-delay: 0.1s;
+}
+
+.submenu a {
+  padding: 10px;
+}
+
+/* Show submenu on hover (Desktop) */
+.nav-links li:hover .submenu {
+  height: 120px;
+}
+
+/* Hide the checkbox */
+#menu-toggle {
+  display: none;
+}
+
+/* Hamburger Icon */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-toggle div {
+  width: 25px;
+  height: 3px;
+  background: white;
+  margin: 5px;
+  transition: 0.3s;
+}
+
+.menu-toggle::before {
+  content: "\2630"; /* Hamburger icon */
+  color: white;
+  font-size: 24px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .navbar {
+    justify-content: space-between;
+  }
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  /* Show menu when checkbox is checked */
+  #menu-toggle:checked ~ .nav-links {
+    margin-top: -4px;
+    max-height: max-content; /* Adjust height based on content */
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Submenu Fix in Mobile */
+  .submenu {
+    position: relative;
+    background-color: #222;
+    width: 100%;
+    display: none;
+  }
+  .submenu a {
+    padding: 10px 32px;
+  }
+
+  /* Show submenu when clicking parent link in mobile */
+  .nav-links li:focus-within .submenu {
+    display: block;
+  }
+
+  /* ✅ Change Hamburger to Close (CSS Content Swap) */
+  #menu-toggle:checked + .menu-toggle::before {
+    content: "\2715"; /* Close icon */
+    color: white;
+  }
+}
